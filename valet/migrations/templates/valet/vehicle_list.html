@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Servicio de Valet Parking - Vehículos Registrados</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th># Ticket</th>
+                    <th>Placa</th>
+                    <th>Vehículo</th>
+                    <th>Cód. Llave</th>
+                    <th>Ubicación</th>
+                    <th>Responsable</th>
+                    <th>Registrado por</th>
+                    <th>Fecha / Hora</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in vehicles %}
+                <tr>
+                    <td><strong>{{ vehicle.ticket_number }}</strong></td>
+                    <td>{{ vehicle.license_plate }}</td>
+                    <td>{{ vehicle.brand_model }}</td>
+                    <td><span class="badge bg-secondary">{{ vehicle.key_code }}</span></td>
+                    <td>{{ vehicle.parking_spot }}</td>
+                    <td>{{ vehicle.responsible }}</td>
+                    <td>{{ vehicle.username }}</td>
+                    <td>{{ vehicle.created_at }}</td>
+                    <td>
+                        {% if vehicle.status == "En Custodia" %}
+                            <span class="badge bg-warning text-dark">{{ vehicle.status }}</span>
+                        {% else %}
+                            <span class="badge bg-success">{{ vehicle.status }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
